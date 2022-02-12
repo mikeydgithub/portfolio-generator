@@ -1,18 +1,4 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-console.log(profileDataArgs);
-const message = 'Hello Node!';
-
-
-const animalArray = ['dog', 'cat', 'pig'];
-animalArray.push('cow');
-
-const personObj = {
-    name: 'Mike',
-    age: 31
-};
-
-personObj.age = 100;
-personObj.occupation = 'Developer';
+const profileDataArgs = process.argv.slice(2);
 
 const printProfileData = profileDataArr => {
     //this
@@ -21,6 +7,7 @@ const printProfileData = profileDataArr => {
     }
 
     console.log('================');
+    
     //is the same as this
     profileDataArr.forEach(profileItem => console.log(profileItem));
 };
