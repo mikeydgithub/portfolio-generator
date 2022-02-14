@@ -1,6 +1,9 @@
+const fs = require('fs'); 
+const generatePage = require('./src/page-template.js')
 const inquirer = require('inquirer');
 
 const promptUser = () => {
+    // destructure projects and about data from templateData based on their property key names
     return inquirer.prompt([
         {
         type: 'input',
@@ -66,7 +69,7 @@ Add a New Project
         {
             type: 'input',
             name: 'about',
-            message: 'What is the name of your project?',
+            message: 'What is the name of your project? (Required)',
             validate: projectNameInput => {
                 if (projectNameInput) {
                     return true;
@@ -132,21 +135,28 @@ Add a New Project
 
 };
 
+
+
 promptUser()
     .then(promptProject)
     .then(portfolioData => {
-        console.log(portfolioData);
+        const pageHTML = generatePage(portfolioData);
+
+        fs.writeFile('./index.html', pageHTML, err => {
+            if (err) throw new Error(err);
+             console.log('Page created! Check out index.html in this directory to see it!');
+        })
     });
 
 
 // The *require* statment is a built-in function thats globally available in node.js. 
 // It allows the app.js file to access the fs module's functions through the 'fs' assignment.
-//const fs = require('fs'); 
+// const fs = require('fs'); 
 // code modules
 // file systems modules - allows, create, and delete files on the server
 // local module - which are the module you wright
 // third party modules - modules you get from the web
-//const generatePage = require('./src/page-template.js')
+// const generatePage = require('./src/page-template.js')
 
 // const pageHTML = generatePage(name, github)
 
